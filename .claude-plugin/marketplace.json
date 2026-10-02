@@ -1,0 +1,12 @@
+{
+  "name": "lolesch",
+  "description": "lolesch personal Claude Code skills.",
+  "owner": { "name": "lolesch" },
+  "plugins": [
+    {
+      "name": "lolesch-skills",
+      "source": "./",
+      "description": "Personal workflow skills: /rederive and /drift-review."
+    }
+  ]
+}
