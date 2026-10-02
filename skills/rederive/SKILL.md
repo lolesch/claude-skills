@@ -11,14 +11,13 @@ happen to come out right. It *expresses* one when no case can come out wrong. Th
 between the two is filled with **guards**, and a guard is the evidence: if honouring the
 rule takes an `if`, the mechanism is the wrong shape.
 
-`SidePanelContext` spent three tickets in that gap. Each Side Panel announced its own
-context from `BeforeAppear` (#75) — correct while every context meant exactly one panel.
-The rule was always "a trade context is the Hero Panel *plus* a Town Stop's panel," and
-the moment that was said out loud the mechanism needed a guard: the Hero Panel belongs to
-every context, so it can never announce one. The mechanism mapped panel → context; the
-invariant maps context → panels. Backwards, and the wrong arity. #57, #74 and #75 each
-refined the direction rather than questioning it, because no step ever asked the human to
-state the rule as a mapping.
+Example: each panel announces its own context when it appears — correct while every
+context meant exactly one panel. The rule was always "a trade context is the hero panel
+*plus* a stop's panel," and the moment that was said out loud the mechanism needed a
+guard: the hero panel belongs to every context, so it can never announce one. The
+mechanism mapped panel → context; the invariant maps context → panels. Backwards, and the
+wrong arity. Three tickets refined the direction rather than questioning it, because no
+step ever asked the human to state the rule as a mapping.
 
 This skill asks. It sweeps the current mechanism, grills the human for the **invariant**,
 probes whether the mechanism can express it, and re-derives one that can — checking the
@@ -48,7 +47,7 @@ human has, never one to infer from the code, which encodes the mechanism you are
 questioning.
 
 Then write it back as a **mapping**: what determines what, in which direction, at what
-arity. `one context → many panels`. `one context → exactly one sink, hub constant`. The
+arity. `one context → many panels`. `one context → exactly one sink, default constant`. The
 mapping is the whole leverage of step 3; prose that resists being written as one is not
 an invariant yet, so keep grilling.
 
@@ -64,7 +63,7 @@ Two probes, each with a forced verdict. Run both.
   A named guard is a fail, and the direction or arity mismatch in step 2's mapping is
   usually the reason.
 - **Over-expression** — can the mechanism represent a state the invariant forbids? Name
-  the state ("two sinks", "a context with no hub"). A representable illegal state is a
+  the state ("two sinks", "a context with no default"). A representable illegal state is a
   fail: it is a bug waiting to be authored, not caught.
 
 A pass on both means the mechanism expresses the invariant and the work is elsewhere —
@@ -78,9 +77,9 @@ says, so the illegal states of step 3 stop being representable.
 
 Then **replay** it. List every case the old mechanism handled — the phase transitions,
 the sibling panels, the out-of-scope deferrals its tickets recorded — and state each
-one's outcome under the derived design. The replay is where the holes are: `leftPanels`
-hid the Healer panel, so deleting the group left the Healer with nothing to hide it,
-which no ticket tracked.
+one's outcome under the derived design. The replay is where the holes are: a group's
+member list also hid one sibling panel, so deleting the group left that panel with nothing
+to hide it, which no ticket tracked.
 
 Take a position on the trade-offs rather than listing them. Where the human proposes an
 alternative, argue it with a concrete failure case or concede; a pros-and-cons table with

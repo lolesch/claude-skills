@@ -17,8 +17,8 @@ Both are user-invoked only (`disable-model-invocation: true`).
 Skills then appear namespaced: `/lolesch-skills:rederive`, `/lolesch-skills:drift-review`.
 Update with `/plugin marketplace update lolesch`.
 
-## Assumptions the skills make of the host repo
+## Requirements
 
-They were written inside InventoryTetris and still lean on its workflow: `docs/agents/issue-tracker.md`,
-and the sibling skills `/grilling`, `/to-spec`, `/to-tickets`, `/implement`, `/code-review`. The worked examples
-cite InventoryTetris tickets.
+The skills assume the `mattpocock-skills` plugin workflow in the host repo:
+the issue tracker documented in `docs/agents/issue-tracker.md`, and the sibling skills `/grilling`, `/to-spec`,
+`/to-tickets`, `/implement`, `/code-review`, `/simplify` and `/improve-codebase-architecture`.

@@ -7,20 +7,18 @@ disable-model-invocation: true
 # Drift Review
 
 **Outcome vs. path.** The outcome of a plan or a merge can be exactly right and the path
-that reached it still wrong. Epic #71's spec was fine; the ticket slice fixed the old
-Side-Panel exclusivity mechanism (`RadioGroup.ClearSelection()`) in ticket #72, then
-replaced that mechanism with `PanelGroup` in #74 — #72 is verified behavior on a code path
-#74 deletes, work that a scene-hierarchy-first path would have made unnecessary to fix at
-all. Before that, `MapPanel`/`MinimapPanel` were built as workarounds and later replaced
-wholesale. Same failure, twice: a **mechanism swap** — replacing what answers one question
-("which panel is visible") with a structurally different implementation — got treated as
-independent, addable-in-any-order tickets instead of the expand/migrate/contract sequence
-`/to-tickets`' own wide-refactor rule calls for. The predictable result is a **stranded
-fix**: work whose acceptance criteria, tests, and play-mode verification all pass against a
-mechanism nothing calls anymore the moment the swap lands. A stranded fix is one species of
-**drift** — outcome and path disagreeing about what was needed. Sequencing that just
-counters your own instinct, with nothing technically wasted, is another; step 4 tests for
-both.
+that reached it still wrong. Example: a spec is fine, but its ticket slice fixes the old
+panel-exclusivity mechanism in ticket A, then replaces that mechanism wholesale in ticket B
+— A is verified behavior on a code path B deletes, work that a replace-first path would
+have made unnecessary to fix at all. The failure is a **mechanism swap** — replacing what
+answers one question ("which panel is visible") with a structurally different
+implementation — treated as independent, addable-in-any-order tickets instead of the
+expand/migrate/contract sequence `/to-tickets`' own wide-refactor rule calls for. The
+predictable result is a **stranded fix**: work whose acceptance criteria, tests, and
+runtime verification all pass against a mechanism nothing calls anymore the moment the
+swap lands. A stranded fix is one species of **drift** — outcome and path disagreeing
+about what was needed. Sequencing that just counters your own instinct, with nothing
+technically wasted, is another; step 4 tests for both.
 
 This skill checks the path, in two places:
 
@@ -132,8 +130,8 @@ Close with 1–2 sentences: the counts per drift kind, and the practical implica
 ticket is actually the next frontier, or what the swap ticket's scope needs to grow by.
 That's the last line. No "want me to…" offer, no restating the table in prose. The report is
 the deliverable, meant to be pasted into `/to-tickets` or an issue edit — stop there.
-Findings are diagnostic, not action — per this repo's own rule, surface drift and let the
-user decide the resequencing; don't edit issues or revert commits unasked. If they do ask:
+Findings are diagnostic, not action — surface drift and let the user decide the
+resequencing; don't edit issues or revert commits unasked. If they do ask:
 
 ### 6. If asked to act
 
